@@ -110,7 +110,7 @@ sudo chmod -R g+r ${path}/files/tmp
 echok "done"
 
 echoinfo "sync for ${path}/files to s3://${destination}/ starts"
-s3cmd -c /tmp/s3cfg sync --delete-removed --exclude 'tmp/*' --exclude 'temp_files/*' --exclude 'cms/*' ${path}/files s3://${destination}/
+s3cmd -c /tmp/s3cfg sync --delete-removed --exclude 'tmp/*' --exclude 'temp_files/*' --exclude 'cms/*' ${path}/files/* s3://${destination}/
 failOnError $? "failed to sync data to s3"
 
 echok "sync for ${path}/files finishe"
