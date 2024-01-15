@@ -123,10 +123,10 @@ ls -1 ${path}/httpdocs/cms/data/ | grep -E '^[1-9][0-9]*$'| while read folder; d
   echoinfo "processing folder: ${folder}"
   localPathToDomainFolder="${path}/httpdocs/cms/data/${folder}"
   s3PathToDomainFolder="s3://${destination}/cms/data/${folder}"
-  s3cmd -c /tmp/s3cfg sync --exclude --delete-removed "${localPathToDomainFolder}" --include 'files/*' --exclude 'tmp/*' --exclude 'temp_files/*' --include 'img/*' --include 'system/logo/*' "${s3PathToDomainFolder}/"
+  s3cmd -c /tmp/s3cfg sync --exclude --delete-removed "${localPathToDomainFolder}/" --include 'files/*' --exclude 'tmp/*' --exclude 'temp_files/*' --include 'img/*' --include 'system/logo/*' "${s3PathToDomainFolder}/"
   failOnError $? "failed to sync ${localPathToDomainFolder} to ${s3PathToDomainFolder}"
 
-  faviconFile=${localPathToDomainFolder}/favicon.ico
+  faviconFile="${localPathToDomainFolder}/favicon.ico"
   if [ -f "${faviconFile}" ]; then
     echoinfo "found favicon.ico file"
     s3cmd -c /tmp/s3cfg put "${faviconFile}" "${s3PathToDomainFolder}/img/favicon.ico"
@@ -144,8 +144,10 @@ ls -1 ${path}/httpdocs/cms/data/ | grep -E '^[1-9][0-9]*$'| while read folder; d
 done
 echok "sync for ${path}/cms/data finished"
 
+set +o errexit
 get_application_domains_from_database
 failOnError $? "failed to get domains from database"
+set -o errexit
 if [[ -z ${domains} ]]; then
   echok "no application domains found for ${mysql_config_file} !"
   exit
