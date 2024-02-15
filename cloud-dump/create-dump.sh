@@ -4,6 +4,16 @@ readonly location=$( cd "$(dirname "$0")" ; pwd -P )
 source ${location}/functions/mysql-functions.sh
 
 readonly excluded_tables_preparation="email_tracking
+hochschulstart_admission_procedure_user_group
+hochschulstart_booking_status
+hochschulstart_bookings
+hochschulstart_bookings_log
+hochschulstart_events
+hochschulstart_events_log
+hochschulstart_settings
+hochschulstart_settings_log
+hochschulstart_study_programs
+hochschulstart_synchronization_information
 nl_task
 nl_config
 office365_session_data
@@ -16,6 +26,16 @@ tmp_file"
 readonly excluded_tables_preview="settings
 settings_schema
 settings_schema_sites
+hochschulstart_admission_procedure_user_group
+hochschulstart_booking_status
+hochschulstart_bookings
+hochschulstart_bookings_log
+hochschulstart_events
+hochschulstart_events_log
+hochschulstart_settings
+hochschulstart_settings_log
+hochschulstart_study_programs
+hochschulstart_synchronization_information
 notification_banner
 digital_signature_document
 digital_signature_provider
